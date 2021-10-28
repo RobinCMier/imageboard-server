@@ -1,7 +1,7 @@
 // import stuff
 const { Router, response } = require("express");
 const User = require("../models").user;
-
+const bcrypt = require("bcrypt");
 //define routes
 const router = new Router();
 //basepage
@@ -26,7 +26,7 @@ router.post("/create", async (req, res, next) => {
     } else {
       const newUser = await User.create({
         email,
-        password,
+        password: bcrypt.hashSync(password, 10),
         fullName,
       });
       res.json(newUser);
