@@ -16,6 +16,22 @@ router.get("/all", async (req, res) => {
     console.log(`Oopsie daisy, this aint working. Here's the message: ${e}`);
   }
 });
-
+//post requests
+router.post("/create", async (req, res, next) => {
+  try {
+    const { title, url } = req.body;
+    if (!title || !url) {
+      res.status(400).send("Missing parameters");
+    } else {
+      const newImage = await Image.create({
+        title,
+        url,
+      });
+      res.json(newImage);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 //export
 module.exports = router;

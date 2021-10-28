@@ -5,9 +5,9 @@ const imageRouter = require("./routers/image");
 
 //create app & middleware
 const app = express();
-
+const jsonParser = express.json();
 //routing and connecting routers
-
+app.use(jsonParser);
 app.use("/users", userRouter);
 app.use("/images", imageRouter);
 
