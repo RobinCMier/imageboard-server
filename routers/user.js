@@ -24,12 +24,14 @@ router.post("/create", async (req, res, next) => {
     if (!email || !password || !fullName) {
       res.status(400).send("missing parameters");
     } else {
+      //this is also a place you can add a const hashedPassword rather than put it in one line
       const newUser = await User.create({
         email,
-        password: bcrypt.hashSync(password, 10),
+        password: bcrypt.hashSync(password, 10), //how many times are you gonna shuffle. Don't worry about it for now
         fullName,
       });
       res.json(newUser);
+      //alt: response.send({message: "new user created", etc})
     }
   } catch (e) {
     next(e);
