@@ -2,12 +2,13 @@
 const { Router, response } = require("express");
 const User = require("../models").user;
 const bcrypt = require("bcrypt");
+const authMiddelware = require("../auth/middleware");
 //define routes
 const router = new Router();
 //basepage
 router.get("/", (req, res) => res.send("Welcome to userpage!"));
 //get requests
-router.get("/all", async (req, res) => {
+router.get("/all", authMiddelware, async (req, res) => {
   try {
     const allUsers = await User.findAll({ raw: true });
     console.log("requesting all users");
