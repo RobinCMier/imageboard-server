@@ -36,5 +36,10 @@ router.post("/create", async (req, res, next) => {
   }
 });
 
+/*line 27-31 may also be written like so: 
+const newUser = await User.create(req.body);
+because you declare all parameters in const req.body already. 
+
+*/
 //export
 module.exports = router;
